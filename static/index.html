@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- This has been adapted from https://stackoverflow.com/a/63587520, CC BY SA 4.0 -->
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <h1>Welcome to the backtracking Sudoku solver! Please provide your board.</h1>
+    <h1>Previously solved problems with exactly one solution can be seen <a href="problems.html">here</a>.</h1>
+    <form method="POST" action="/" id="problem">
+      <div id="row-0">
+        <input type="number" min="0" max="9" value="0" name="00">
+        <input type="number" min="0" max="9" value="0" name="01">
+        <input type="number" min="0" max="9" value="0" name="02" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="03">
+        <input type="number" min="0" max="9" value="0" name="04">
+        <input type="number" min="0" max="9" value="0" name="05" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="06">
+        <input type="number" min="0" max="9" value="0" name="07">
+        <input type="number" min="0" max="9" value="0" name="08">
+      </div>
+      <div id="row-1">
+        <input type="number" min="0" max="9" value="0" name="10">
+        <input type="number" min="0" max="9" value="0" name="11">
+        <input type="number" min="0" max="9" value="0" name="12" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="13">
+        <input type="number" min="0" max="9" value="0" name="14">
+        <input type="number" min="0" max="9" value="0" name="15" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="16">
+        <input type="number" min="0" max="9" value="0" name="17">
+        <input type="number" min="0" max="9" value="0" name="18">
+      </div>
+      <div id="row-2" class="vertical-gap">
+        <input type="number" min="0" max="9" value="0" name="20">
+        <input type="number" min="0" max="9" value="0" name="21">
+        <input type="number" min="0" max="9" value="0" name="22" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="23">
+        <input type="number" min="0" max="9" value="0" name="24">
+        <input type="number" min="0" max="9" value="0" name="25" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="26">
+        <input type="number" min="0" max="9" value="0" name="27">
+        <input type="number" min="0" max="9" value="0" name="28">
+      </div>
+      <div id="row-3">
+        <input type="number" min="0" max="9" value="0" name="30">
+        <input type="number" min="0" max="9" value="0" name="31">
+        <input type="number" min="0" max="9" value="0" name="32" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="33">
+        <input type="number" min="0" max="9" value="0" name="34">
+        <input type="number" min="0" max="9" value="0" name="35" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="36">
+        <input type="number" min="0" max="9" value="0" name="37">
+        <input type="number" min="0" max="9" value="0" name="38">
+      </div>
+      <div id="row-4">
+        <input type="number" min="0" max="9" value="0" name="40">
+        <input type="number" min="0" max="9" value="0" name="41">
+        <input type="number" min="0" max="9" value="0" name="42" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="43">
+        <input type="number" min="0" max="9" value="0" name="44">
+        <input type="number" min="0" max="9" value="0" name="45" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="46">
+        <input type="number" min="0" max="9" value="0" name="47">
+        <input type="number" min="0" max="9" value="0" name="48">
+      </div>
+      <div id="row-5" class="vertical-gap">
+        <input type="number" min="0" max="9" value="0" name="50">
+        <input type="number" min="0" max="9" value="0" name="51">
+        <input type="number" min="0" max="9" value="0" name="52" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="53">
+        <input type="number" min="0" max="9" value="0" name="54">
+        <input type="number" min="0" max="9" value="0" name="55" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="56">
+        <input type="number" min="0" max="9" value="0" name="57">
+        <input type="number" min="0" max="9" value="0" name="58">
+      </div>
+      <div id="row-6">
+        <input type="number" min="0" max="9" value="0" name="60">
+        <input type="number" min="0" max="9" value="0" name="61">
+        <input type="number" min="0" max="9" value="0" name="62" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="63">
+        <input type="number" min="0" max="9" value="0" name="64">
+        <input type="number" min="0" max="9" value="0" name="65" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="66">
+        <input type="number" min="0" max="9" value="0" name="67">
+        <input type="number" min="0" max="9" value="0" name="68">
+      </div>
+      <div id="row-7">
+        <input type="number" min="0" max="9" value="0" name="70">
+        <input type="number" min="0" max="9" value="0" name="71">
+        <input type="number" min="0" max="9" value="0" name="72" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="73">
+        <input type="number" min="0" max="9" value="0" name="74">
+        <input type="number" min="0" max="9" value="0" name="75" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="76">
+        <input type="number" min="0" max="9" value="0" name="77">
+        <input type="number" min="0" max="9" value="0" name="78">
+      </div>
+      <div id="row-8">
+        <input type="number" min="0" max="9" value="0" name="80">
+        <input type="number" min="0" max="9" value="0" name="81">
+        <input type="number" min="0" max="9" value="0" name="82" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="83">
+        <input type="number" min="0" max="9" value="0" name="84">
+        <input type="number" min="0" max="9" value="0" name="85" class="horizontal-gap">
+        <input type="number" min="0" max="9" value="0" name="86">
+        <input type="number" min="0" max="9" value="0" name="87">
+        <input type="number" min="0" max="9" value="0" name="88">
+      </div>
+      <input class="btn btn-primary" type="submit" value="submit">
+    </form>
+    <div id="solutions"></div>
+  </body>
+  <script src="scripts.js"></script>
+</html>
